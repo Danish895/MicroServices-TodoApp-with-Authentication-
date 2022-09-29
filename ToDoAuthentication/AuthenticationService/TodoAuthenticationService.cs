@@ -11,6 +11,7 @@ namespace ToDoAuthentication.AuthenticationService
 {
     public class TodoAuthenticationService : ITodoAuthenticationService
     {
+
         private readonly IConfiguration _configuration;
         
         private readonly UserManager<IdentityUser> _userManager;
@@ -21,7 +22,7 @@ namespace ToDoAuthentication.AuthenticationService
         }
 
         
-    
+        
         public async Task<String> RegisterUserAsync(UserRequestModel user)
         {
             var existingUser = await _userManager.FindByEmailAsync(user.Email);
@@ -83,5 +84,9 @@ namespace ToDoAuthentication.AuthenticationService
             return jwt;
         }
 
+        public async Task<String> getUserIdAsync()
+        {
+            return "HHjh";
+        }
     }
 }

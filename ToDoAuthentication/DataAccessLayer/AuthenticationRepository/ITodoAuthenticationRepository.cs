@@ -2,5 +2,6 @@
 {
     public interface ITodoAuthenticationRepository
     {
+        Task<String> getUserIdAsync();
     }
 }

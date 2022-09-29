@@ -7,5 +7,6 @@ namespace ToDoAuthentication.AuthenticationService
     {
         Task<String> RegisterUserAsync(UserRequestModel user);
         Task<String> UserLoginAsync(UserRequestModel user);
+        Task<String> getUserIdAsync();
     }
 }

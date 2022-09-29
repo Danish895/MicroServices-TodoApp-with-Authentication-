@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
 using ToDoApp.ToDoModel;
 using ToDoApp.ToDoService;
 
@@ -10,7 +12,6 @@ namespace ToDoApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TodoAppController : ControllerBase
     {
         private ITodoAppService _todoAppService;
@@ -26,17 +27,10 @@ namespace ToDoApp.Controllers
         [Route("GetAllTodoList")]
         public async Task<IEnumerable<TodoModel>> GetAsyncTodo()
         {
-            var url = "https://localhost:7190/api/UserRequest/Login";
-            using var client = new HttpClient();
-            var msg = new HttpRequestMessage(HttpMethod.Get, url);
+            var keyValue = HttpContext.Items["UserId"];
 
-            var res = await client.SendAsync(msg);
 
-            var content = await res.Content.ReadAsStringAsync();
-
-            //TodoModel StudentDetails = JsonContent.DeserializeObject<TodoModel>(content);
-           
-
+            Console.WriteLine(keyValue);
 
             IEnumerable<TodoModel> todos = await _todoAppService.GetAsync();
             return todos;
